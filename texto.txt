@@ -1,3 +1,19 @@
 {
-    "tareas": []
+    "tareas": {
+        "1234": {
+            "descripcion": "1234qqwerqwerqwer",
+            "tiempoEstimado": "1234",
+            "status": "backlog"
+        },
+        "qwre": {
+            "descripcion": "qwerqwrqwre",
+            "tiempoEstimado": "qwer",
+            "status": "testing"
+        },
+        "qwer234": {
+            "descripcion": "qwerqwerqwerqre",
+            "tiempoEstimado": "qewr",
+            "status": "testing"
+        }
+    }
 }

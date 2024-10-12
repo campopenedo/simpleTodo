@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tareas</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Asumiendo que tienes estilos -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -27,11 +26,15 @@
     <div id="newCardModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>Nueva Tarea</h2>
+            <h2 id="modalTitle"></h2>
             <input type="text" id="taskTitle" placeholder="Título">
             <textarea id="taskDescription" placeholder="Descripción"></textarea>
             <input type="text" id="taskTime" placeholder="Tiempo estimado (HH:MM)">
-            <button id="saveTaskBtn">Guardar</button>
+            <div class="card-buttons">
+                <button id="saveTaskBtn">Guardar</button>
+                <button id="editTaskBtn">Editar</button>
+                <button id="removeTaskBtn">Eliminar</button>
+            </div>
         </div>
     </div>
     <pre id="fileContent"></pre>

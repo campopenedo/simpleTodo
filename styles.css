@@ -58,6 +58,16 @@ button:hover {
     border-radius: 5px;
     width: 300px;
 }
+
+.modal-content .card-buttons {
+    margin: 0px;
+}
+
+.modal-content .card-buttons button {
+    padding: 10px 15px;
+}
+
+
 .close {
     color: #aaa;
     float: right;
@@ -68,6 +78,7 @@ button:hover {
 .close:hover {
     color: #fff;
 }
+
 input, textarea {
     width: 100%;
     padding: 5px;
@@ -76,6 +87,11 @@ input, textarea {
     border: 1px solid #555;
     color: #fff;
 }
+
+.card {
+    position: relative;
+}
+
 .card-buttons {
     display: flex;
     justify-content: space-between;
@@ -85,10 +101,10 @@ input, textarea {
     padding: 5px 10px;
     font-size: 12px;
 }
-.delete-btn {
+.edit-btn {
     background-color: #d83b01;
 }
-.delete-btn:hover {
+.edit-btn:hover {
     background-color: #a52b00;
 }
 

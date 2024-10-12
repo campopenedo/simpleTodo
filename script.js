@@ -4,6 +4,7 @@ const closeBtn = document.getElementsByClassName('close')[0];
 const saveTaskBtn = document.getElementById('saveTaskBtn');
 const backlogColumn = document.getElementById('backlog');
 const columns = document.querySelectorAll('.column');
+const editTaskBtn = document.getElementById('editTaskBtn');
 
 function getTareas() {
     const tareas = localStorage.getItem('tareas');
@@ -74,7 +75,35 @@ function loadExistingTasks(tareas) {
 }
 
 newCardBtn.onclick = function() {
+    document.getElementById("modalTitle").innerText = "Nueva Tarea";
+    document.getElementById("editTaskBtn").style.display = "none";
+    document.getElementById("saveTaskBtn").style.display = "block";
+    document.getElementById("removeTaskBtn").style.display = "none";
+    document.getElementById('taskTitle').readOnly = false;
     modal.style.display = "block";
+}
+
+editTaskBtn.onclick = function() {
+    let tareas = getTareas(),
+    tarea = tareas.tareas[editTaskBtn.getAttribute('data-title')];
+
+    tarea.descripcion = document.getElementById('taskDescription').value;
+    tarea.tiempoEstimado = document.getElementById('taskTime').value;
+
+    setTareas(tareas);
+    sendDataToText(tareas);
+
+    let card = document.querySelector('.card.' + editTaskBtn.getAttribute('data-title'));
+
+    document.querySelector('.card.' + editTaskBtn.getAttribute('data-title') + ' #card-description').textContent = tarea.descripcion;
+    document.querySelector('.card.' + editTaskBtn.getAttribute('data-title') + ' #card-time').textContent = "Tiempo estimado: " + tarea.tiempoEstimado;
+
+    modal.style.display = "none";
+    document.getElementById('taskTitle').value = '';
+    document.getElementById('taskDescription').value = '';
+    document.getElementById('taskTime').value = '';
+
+
 }
 
 closeBtn.onclick = function() {
@@ -111,24 +140,28 @@ saveTaskBtn.onclick = function() {
 
 function createCard(title, description, time, status) {
     const card = document.createElement('div');
+    card.classList.add('card');
+    let regexStartLetter = /^[A-Za-z]/;
+    let classTitle = regexStartLetter.test(title) ? title : "a" + title.toString();
+    card.classList.add(classTitle);
     card.innerHTML = `
-        <h3>${title}</h3>
-        <p>${description}</p>
-        <p>Tiempo estimado: ${time}</p>
+        <h3 class="card-title">${title}</h3>
+        <p id="card-description">${description}</p>
+        <p id="card-time">Tiempo estimado: ${time}</p>
         <p>Status: ${status}</p>
         <div class="card-buttons">
             <button class="move-back">◀ Atrás</button>
             <button class="move-forward">Adelante ▶</button>
-            <button class="delete-btn">Eliminar</button>
+            <button class="edit-btn">Editar</button>
         </div>
     `;
     const moveBackBtn = card.querySelector('.move-back');
     const moveForwardBtn = card.querySelector('.move-forward');
-    const deleteBtn = card.querySelector('.delete-btn');
+    const editBtn = card.querySelector('.edit-btn');
 
     moveBackBtn.addEventListener('click', () => moveCard(card, -1));
     moveForwardBtn.addEventListener('click', () => moveCard(card, 1));
-    deleteBtn.addEventListener('click', () => deleteCard(card));
+    editBtn.addEventListener('click', () => editCard(card, classTitle));
 
     return card;
 }
@@ -146,6 +179,39 @@ function moveCard(card, direction) {
     }
 }
 
+function editCard(card, title) {
+    let tareas = getTareas(),
+    tareaTitle = card.getElementsByClassName('card-title')[0].textContent,
+    tareaData = tareas.tareas[tareaTitle],
+    taskTitle = document.getElementById('taskTitle');
+
+    document.getElementById("modalTitle").textContent = "Editar Tarea";
+    document.getElementById("editTaskBtn").style.display = "block";
+    document.getElementById("saveTaskBtn").style.display = "none";
+
+    editTaskBtn.setAttribute('data-title', tareaTitle);
+
+
+    taskTitle.readOnly = true;
+    taskTitle.value = tareaTitle + ' [no modificable]';
+    document.getElementById('taskDescription').value = tareaData['descripcion'];
+    document.getElementById('taskTime').value = tareaData['tiempoEstimado'];
+
+    document.getElementById('removeTaskBtn').onclick = function() {
+        deleteCard(card);
+        modal.style.display = "none";
+        document.getElementById('taskTitle').value = '';
+        document.getElementById('taskDescription').value = '';
+        document.getElementById('taskTime').value = '';
+    };
+
+    document.getElementById("removeTaskBtn").style.display = "block";
+
+
+    modal.style.display = "block";
+
+}
+
 function deleteCard(card) {
     if (confirm('¿Estás seguro de que quieres eliminar esta tarea?')) {
         const title = card.querySelector('h3').textContent;
@@ -155,6 +221,15 @@ function deleteCard(card) {
 }
 
 function updateTareaStatus(title, newStatus) {
+    const tareas = getTareas();
+    if (tareas.tareas[title]) {
+        tareas.tareas[title].status = newStatus;
+        setTareas(tareas);
+        sendDataToText(tareas);
+    }
+}
+
+function updateTareaInfo(title) {
     const tareas = getTareas();
     if (tareas.tareas[title]) {
         tareas.tareas[title].status = newStatus;
