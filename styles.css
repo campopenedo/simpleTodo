@@ -1,0 +1,100 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    margin: 0;
+    padding: 20px;
+}
+.board {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+.column {
+    background-color: #2d2d2d;
+    border-radius: 5px;
+    padding: 10px;
+    width: 250px;
+}
+.column h2 {
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #444;
+}
+.card {
+    background-color: #3c3c3c;
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.card h3 {
+    margin-top: 0;
+}
+button {
+    background-color: #0078d4;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #106ebe;
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+    background-color: #2d2d2d;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.close:hover {
+    color: #fff;
+}
+input, textarea {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    background-color: #3c3c3c;
+    border: 1px solid #555;
+    color: #fff;
+}
+.card-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.card-buttons button {
+    padding: 5px 10px;
+    font-size: 12px;
+}
+.delete-btn {
+    background-color: #d83b01;
+}
+.delete-btn:hover {
+    background-color: #a52b00;
+}
+
+#fileContent {
+    display: none;
+}
+.invisible {
+    display: none!important;
+}
