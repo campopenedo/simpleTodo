@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <button id="newCardBtn">Nueva Tarea</button>
+    <button id="newCardBtn" class="newCardBtn">Nueva Tarea</button>
     <div class="board">
         <div class="column" id="backlog">
             <h2>Backlog</h2>
