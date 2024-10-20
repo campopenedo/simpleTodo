@@ -30,6 +30,7 @@ body {
 .card h3 {
     margin-top: 0;
 }
+
 button {
     background-color: #0078d4;
     color: white;
@@ -107,7 +108,12 @@ input, textarea {
 .edit-btn:hover {
     background-color: #a52b00;
 }
-
+.newCardBtn {
+    background-color: #ff5733;
+}
+.newCardBtn:hover {
+    background-color: #df4b2c
+}
 #fileContent {
     display: none;
 }
